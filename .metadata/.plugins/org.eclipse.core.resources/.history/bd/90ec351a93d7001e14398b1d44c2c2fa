@@ -1,0 +1,11 @@
+DB_CONF_STRING=jdbc:mysql://4.236.144.236:3307/borrowrenewdb?allowPublicKeyRetrieval=true&useSSL=false
+dbuser=root
+dbpassword=root
+email_sender=test1@arthavedika.com
+password=AV123
+port=587
+host=mail.arthavedika.com
+email_to=ektasharma011@gmail.com
+path_to_pdf=C:\\metaResponseBatchFile\\YourOutputFile1.pdf
+
+

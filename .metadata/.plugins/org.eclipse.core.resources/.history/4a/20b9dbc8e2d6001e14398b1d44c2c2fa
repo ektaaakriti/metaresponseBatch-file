@@ -1,0 +1,69 @@
+package uploadFileToDB;
+
+
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Properties;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.supercsv.cellprocessor.Optional;
+import org.supercsv.cellprocessor.ParseDate;
+import org.supercsv.cellprocessor.constraint.NotNull;
+import org.supercsv.cellprocessor.ift.CellProcessor;
+import org.supercsv.io.CsvBeanReader;
+import org.supercsv.io.ICsvBeanReader;
+import org.supercsv.prefs.CsvPreference;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.util.JRSaver;
+
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class JasperReportPDFGenerator {
+	static connectToDb DB=new connectToDb();
+	 static Connection dbcon=DB.connect_db();
+
+	 static Properties properties = DB.getProperties();
+	 public static Logger log = LogManager.getLogger(Upload.class.getName());
+	 public void JasperReportPDFGenerator() {
+		  try {
+	            // 1. Load and compile the .jrxml file
+	            InputStream inputStream = JasperReportPDFGenerator.class.getResourceAsStream("classpath:metaresponse.jrxml");
+	            JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+
+	            // Optional: Save the compiled report to improve performance on subsequent executions
+	            // JRSaver.saveObject(jasperReport, "compiled_report.jasper");
+
+	            // 2. Provide data to the report (if needed)
+	            Map<String, Object> parameters = new HashMap<>();
+	            // Add parameters if required
+	            // parameters.put("parameterName", parameterValue);
+
+	            // 3. Fill the report with data
+	            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+
+	            // 4. Export the filled report to a PDF file
+	            JasperExportManager.exportReportToPdfFile(jasperPrint, "output_report.pdf");
+
+	            System.out.println("Report generated successfully!");
+	        } catch (JRException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	 
+	
+	
+}
+

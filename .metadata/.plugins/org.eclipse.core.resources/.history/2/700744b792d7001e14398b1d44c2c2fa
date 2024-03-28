@@ -1,0 +1,6 @@
+DB_CONF_STRING=jdbc:mysql://4.236.144.236:3307/borrowrenewdb?allowPublicKeyRetrieval=true&useSSL=false
+dbuser=root
+dbpassword=root
+csvpath=C:\\uploadbatchfile\\UploadFiles\\
+
+
